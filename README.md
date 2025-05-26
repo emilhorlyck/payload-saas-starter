@@ -6,7 +6,6 @@ A modern, open-source SaaS starter kit built with Next.js 15 and Payload CMS, de
 
 ![Payload SaaS Starter](https://payload-saas-starter.vercel.app/opengraph-image.jpg)
 
-
 ## Demo
 
 [payload-saas-starter.vercel.app](https://payload-saas-starter.vercel.app)
@@ -90,7 +89,6 @@ A modern, open-source SaaS starter kit built with Next.js 15 and Payload CMS, de
   /collections         # Payload collections
   /components          # React components
     /auth              # Authentication components
-    /ds                # Design system components
     /site              # Site components
     /theme             # Theme components
     /ui                # UI components
