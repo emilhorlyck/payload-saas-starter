@@ -1,4 +1,3 @@
-import { Section, Container } from '@/components/ds'
 import { LoginForm } from '@/components/auth/login-form'
 import { AuthBox } from '@/components/auth/auth-box'
 

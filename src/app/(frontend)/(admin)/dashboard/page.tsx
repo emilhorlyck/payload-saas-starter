@@ -1,4 +1,3 @@
-import { Section, Container } from '@/components/ds'
 import { User as UserIcon } from 'lucide-react'
 import { LogoutButton } from '@/components/auth/logout-button'
 
@@ -21,42 +20,38 @@ export default async function Admin() {
 
   return (
     <>
-      <Section>
-        <Container>
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-xl">Dashboard</h1>
-            <LogoutButton />
-          </div>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-xl">Dashboard</h1>
+        <LogoutButton />
+      </div>
 
-          <div className="grid gap-8 md:grid-cols-[2fr_1fr]">
-            <div className="space-y-6">
-              <UserProfile user={user} accountAgeDays={accountAgeDays} />
+      <div className="grid gap-8 md:grid-cols-[2fr_1fr]">
+        <div className="space-y-6">
+          <UserProfile user={user} accountAgeDays={accountAgeDays} />
+        </div>
+
+        <div className="border rounded-lg p-6">
+          <h2 className="text-lg mb-4">Account Summary</h2>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Account type</span>
+              <span className="font-medium capitalize">{user.role}</span>
             </div>
-
-            <div className="border rounded-lg p-6">
-              <h2 className="text-lg mb-4">Account Summary</h2>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Account type</span>
-                  <span className="font-medium capitalize">{user.role}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Account age</span>
-                  <span className="font-medium">{accountAgeDays} days</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Email</span>
-                  <span className="font-medium">{user.email}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Created at</span>
-                  <span className="font-medium">{formattedCreatedAt}</span>
-                </div>
-              </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Account age</span>
+              <span className="font-medium">{accountAgeDays} days</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Email</span>
+              <span className="font-medium">{user.email}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Created at</span>
+              <span className="font-medium">{formattedCreatedAt}</span>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </div>
     </>
   )
 }
