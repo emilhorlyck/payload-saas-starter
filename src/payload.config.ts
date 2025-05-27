@@ -1,6 +1,8 @@
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
+
 import { fileURLToPath } from 'url'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
@@ -30,21 +32,26 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
+  db: sqliteAdapter({
+    client: {
+      url: process.env.SQLITE_URI || '',
     },
   }),
+  // postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI || '',
+  //   },
+  // }),
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    vercelBlobStorage({
-      enabled: true,
-      collections: {
-        media: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
+    // vercelBlobStorage({
+    //   enabled: true,
+    //   collections: {
+    //     media: true,
+    //   },
+    //   token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    // })
 
     // s3Storage({
     //   collections: {
