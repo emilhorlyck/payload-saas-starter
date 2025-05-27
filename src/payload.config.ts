@@ -5,7 +5,8 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 
 import { fileURLToPath } from 'url'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { buildConfig } from 'payload'
+import { buildConfig, Config } from 'payload'
+import { multiTenantPlugin } from '@payloadcms/plugin-multi-tenant'
 
 // If you want to use Cloudflare R2 or AWS S3, uncomment the following lines
 // import { s3Storage } from '@payloadcms/storage-s3'
@@ -26,7 +27,35 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [
+    Users,
+    Media,
+    {
+      slug: 'tenants',
+      admin: {
+        useAsTitle: 'name',
+      },
+      fields: [
+        // remember, you own these fields
+        // these are merely suggestions/examples
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'slug',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'domain',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -45,6 +74,11 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
+    multiTenantPlugin<Config>({
+      collections: {
+        media: {},
+      },
+    }),
     // vercelBlobStorage({
     //   enabled: true,
     //   collections: {
