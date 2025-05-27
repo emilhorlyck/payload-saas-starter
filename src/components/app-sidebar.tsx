@@ -30,10 +30,8 @@ import type { User } from '@/payload-types'
 import { getUser } from '@/lib/auth'
 import { NavCode } from './nav-code'
 
-const user: User | null = await getUser()
-
 // This is sample data.
-const data = {
+const getDataWithUser = (user: User | null) => ({
   user: {
     name: user?.email,
     email: user?.email,
@@ -203,9 +201,46 @@ const data = {
       ],
     },
   ],
-}
+})
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [user, setUser] = React.useState<User | null>(null)
+  const [isLoading, setIsLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await getUser()
+        setUser(userData)
+      } catch (error) {
+        console.error('Error fetching user:', error)
+        setUser(null)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchUser()
+  }, [])
+
+  const data = getDataWithUser(user)
+
+  if (isLoading) {
+    return (
+      <Sidebar collapsible="icon" {...props}>
+        <SidebarHeader>
+          <div className="flex items-center justify-center p-4">
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
+          </div>
+        </SidebarHeader>
+        <SidebarContent>
+          <div className="flex items-center justify-center p-4">Loading...</div>
+        </SidebarContent>
+        <SidebarRail />
+      </Sidebar>
+    )
+  }
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
