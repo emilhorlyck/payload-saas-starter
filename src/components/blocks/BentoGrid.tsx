@@ -32,25 +32,25 @@ const Skeleton = () => (
 )
 const items = [
   {
-    title: 'The Dawn of Innovation',
+    title: 'Authentication System',
     description: 'Explore the birth of groundbreaking ideas and inventions.',
     header: <Skeleton />,
     icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: 'The Digital Revolution',
+    title: 'Modern Tech Stack',
     description: 'Dive into the transformative power of technology.',
     header: <Skeleton />,
     icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: 'The Art of Design',
+    title: 'Developer Experience',
     description: 'Discover the beauty of thoughtful and functional design.',
     header: <Skeleton />,
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: 'The Power of Communication',
+    title: 'Ready-to-Use Features',
     description: 'Understand the impact of effective communication in our lives.',
     header: <Skeleton />,
     icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
