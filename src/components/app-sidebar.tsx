@@ -192,7 +192,7 @@ const getDataWithUser = (user: User | null) => ({
         },
         {
           title: 'repositories',
-          url: '#',
+          url: '/dashboard/repos',
         },
         {
           title: 'Commits',
