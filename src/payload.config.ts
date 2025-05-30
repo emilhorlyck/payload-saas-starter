@@ -88,9 +88,10 @@ export default buildConfig({
         media: {},
         repos: {},
       },
-      // userHasAccessToAllTenants(user) {
-      //   return true
-      // },
+      userHasAccessToAllTenants(user) {
+        // Only admin users can access all tenants
+        return user?.role === 'admin'
+      },
 
       useTenantsCollectionAccess: true,
       // useUsersTenantFilter: false,
