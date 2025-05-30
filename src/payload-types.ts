@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     tenants: Tenant;
+    repos: Repo;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +80,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     tenants: TenantsSelect<false> | TenantsSelect<true>;
+    repos: ReposSelect<false> | ReposSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -146,8 +148,6 @@ export interface User {
 export interface Tenant {
   id: number;
   name: string;
-  slug: string;
-  domain: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -173,6 +173,17 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "repos".
+ */
+export interface Repo {
+  id: number;
+  tenant?: (number | null) | Tenant;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -189,6 +200,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tenants';
         value: number | Tenant;
+      } | null)
+    | ({
+        relationTo: 'repos';
+        value: number | Repo;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -279,8 +294,16 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface TenantsSelect<T extends boolean = true> {
   name?: T;
-  slug?: T;
-  domain?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "repos_select".
+ */
+export interface ReposSelect<T extends boolean = true> {
+  tenant?: T;
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
 }
