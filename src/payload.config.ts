@@ -26,6 +26,14 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    autoLogin:
+      process.env.NEXT_PUBLIC_ENABLE_AUTOLOGIN === 'true'
+        ? {
+            email: 'test@example.com',
+            password: 'test',
+            prefillOnly: false,
+          }
+        : false,
   },
   collections: [
     Users,
@@ -36,20 +44,21 @@ export default buildConfig({
         useAsTitle: 'name',
       },
       fields: [
-        // remember, you own these fields
-        // these are merely suggestions/examples
         {
           name: 'name',
           type: 'text',
           required: true,
         },
+      ],
+    },
+    {
+      slug: 'repos',
+      admin: {
+        useAsTitle: 'name',
+      },
+      fields: [
         {
-          name: 'slug',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'domain',
+          name: 'name',
           type: 'text',
           required: true,
         },
@@ -77,7 +86,15 @@ export default buildConfig({
     multiTenantPlugin<Config>({
       collections: {
         media: {},
+        repos: {},
       },
+      // userHasAccessToAllTenants(user) {
+      //   return true
+      // },
+
+      useTenantsCollectionAccess: true,
+      // useUsersTenantFilter: false,
+      // useTenantsListFilter: false,
     }),
     // vercelBlobStorage({
     //   enabled: true,
