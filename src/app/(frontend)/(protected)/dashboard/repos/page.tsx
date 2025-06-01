@@ -95,7 +95,7 @@ export default function ReposPage() {
 
   return (
     <div className="min-h-screen relative">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 p-4">
         {repos.map((repo) => (
           <RepositoryCard key={repo.id} repo={repo} />
         ))}

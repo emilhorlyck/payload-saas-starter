@@ -17,22 +17,24 @@ export function RepositoryCard({ repo }: RepositoryCardProps) {
     <Card className="hover:shadow-md transition-shadow min-w-[300px]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 pr-2">
             <div className="flex items-center gap-2 min-w-0">
               {formatted.isPrivate ? (
                 <Lock size={16} className="flex-shrink-0" />
               ) : (
                 <Globe size={16} className="flex-shrink-0" />
               )}
-              <CardTitle className="text-lg truncate min-w-0">{formatted.name}</CardTitle>
+              <CardTitle className="text-lg truncate min-w-0 overflow-hidden">
+                {formatted.name}
+              </CardTitle>
             </div>
-            <p className="text-sm text-muted-foreground">{formatted.fullName}</p>
+            <p className="text-sm text-muted-foreground truncate">{formatted.fullName}</p>
           </div>
           <a
             href={formatted.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground flex-shrink-0"
           >
             <ExternalLink size={16} />
           </a>
