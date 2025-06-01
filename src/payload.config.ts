@@ -16,6 +16,7 @@ import path from 'path'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Repos } from './collections/Repos'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,19 +52,7 @@ export default buildConfig({
         },
       ],
     },
-    {
-      slug: 'repos',
-      admin: {
-        useAsTitle: 'name',
-      },
-      fields: [
-        {
-          name: 'name',
-          type: 'text',
-          required: true,
-        },
-      ],
-    },
+    Repos,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

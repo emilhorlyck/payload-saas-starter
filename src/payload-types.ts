@@ -178,7 +178,128 @@ export interface Media {
 export interface Repo {
   id: number;
   tenant?: (number | null) | Tenant;
+  /**
+   * GitHub repository ID
+   */
+  github_id: number;
+  /**
+   * Repository name
+   */
   name: string;
+  /**
+   * Full repository name (owner/repo)
+   */
+  full_name: string;
+  /**
+   * Repository description
+   */
+  description?: string | null;
+  /**
+   * Whether the repository is private
+   */
+  private?: boolean | null;
+  /**
+   * GitHub repository URL
+   */
+  html_url: string;
+  /**
+   * Repository clone URL
+   */
+  clone_url?: string | null;
+  /**
+   * Repository SSH URL
+   */
+  ssh_url?: string | null;
+  /**
+   * Repository homepage URL
+   */
+  homepage?: string | null;
+  /**
+   * Primary programming language
+   */
+  language?: string | null;
+  /**
+   * Number of stars
+   */
+  stargazers_count?: number | null;
+  /**
+   * Number of watchers
+   */
+  watchers_count?: number | null;
+  /**
+   * Number of forks
+   */
+  forks_count?: number | null;
+  /**
+   * Number of open issues
+   */
+  open_issues_count?: number | null;
+  /**
+   * Default branch name
+   */
+  default_branch?: string | null;
+  /**
+   * Repository creation date
+   */
+  created_at?: string | null;
+  /**
+   * Last update date
+   */
+  updated_at?: string | null;
+  /**
+   * Last push date
+   */
+  pushed_at?: string | null;
+  /**
+   * Repository size in KB
+   */
+  size?: number | null;
+  /**
+   * Whether the repository is archived
+   */
+  archived?: boolean | null;
+  /**
+   * Whether the repository is disabled
+   */
+  disabled?: boolean | null;
+  /**
+   * Repository topics/tags
+   */
+  topics?:
+    | {
+        topic?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Repository visibility
+   */
+  visibility?: ('public' | 'private') | null;
+  /**
+   * Repository owner information
+   */
+  owner: {
+    /**
+     * Owner username
+     */
+    login: string;
+    /**
+     * Owner GitHub ID
+     */
+    github_id: number;
+    /**
+     * Owner avatar URL
+     */
+    avatar_url?: string | null;
+    /**
+     * Owner GitHub profile URL
+     */
+    html_url?: string | null;
+    /**
+     * Owner type
+     */
+    type?: ('User' | 'Organization') | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -303,7 +424,43 @@ export interface TenantsSelect<T extends boolean = true> {
  */
 export interface ReposSelect<T extends boolean = true> {
   tenant?: T;
+  github_id?: T;
   name?: T;
+  full_name?: T;
+  description?: T;
+  private?: T;
+  html_url?: T;
+  clone_url?: T;
+  ssh_url?: T;
+  homepage?: T;
+  language?: T;
+  stargazers_count?: T;
+  watchers_count?: T;
+  forks_count?: T;
+  open_issues_count?: T;
+  default_branch?: T;
+  created_at?: T;
+  updated_at?: T;
+  pushed_at?: T;
+  size?: T;
+  archived?: T;
+  disabled?: T;
+  topics?:
+    | T
+    | {
+        topic?: T;
+        id?: T;
+      };
+  visibility?: T;
+  owner?:
+    | T
+    | {
+        login?: T;
+        github_id?: T;
+        avatar_url?: T;
+        html_url?: T;
+        type?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
