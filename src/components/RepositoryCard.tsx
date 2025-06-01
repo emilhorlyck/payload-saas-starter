@@ -14,14 +14,18 @@ export function RepositoryCard({ repo }: RepositoryCardProps) {
   const formatted = formatRepoForDisplay(repo)
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className="hover:shadow-md transition-shadow min-w-[300px]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
-            <CardTitle className="text-lg truncate flex items-center gap-2">
-              {formatted.isPrivate ? <Lock size={16} /> : <Globe size={16} />}
-              {formatted.name}
-            </CardTitle>
+            <div className="flex items-center gap-2 min-w-0">
+              {formatted.isPrivate ? (
+                <Lock size={16} className="flex-shrink-0" />
+              ) : (
+                <Globe size={16} className="flex-shrink-0" />
+              )}
+              <CardTitle className="text-lg truncate min-w-0">{formatted.name}</CardTitle>
+            </div>
             <p className="text-sm text-muted-foreground">{formatted.fullName}</p>
           </div>
           <a
